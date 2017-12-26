@@ -24,5 +24,4 @@ nbdist/
 .nb-gradle/
 
 ### TRAINING DATA ###
-*-training*.json
-*-training.json
+*.json
