@@ -1,0 +1,102 @@
+Welches Team ist in der [COMP] Tabellenführer?,standings
+Wer ist Tabellenführer in der [COMP]?,standings
+Wer ist Erster in der [COMP]?,standings
+Wer ist der Tabellenletzte in der [COMP]?,standings
+Wer ist Zweiter in der [COMP] Tabelle?,standings
+Wer ist Zweiter in der [COMP]?,standings
+Wer ist Letzter in der [COMP]?,standings
+Welche Position hat [TEAM] in der [COMP] Tabelle?,standings
+Wieviele Punkte hat [TEAM] in der [COMP] Tabelle?,standings
+Wo ist [TEAM] in der [COMP] Tabelle?,standings
+Wie ist die Tabelle der [COMP]?,standings
+Wie sieht die [COMP] Tabelle aus?,standings
+Bitte zeig mir die Tabelle der [COMP].,standings
+Bitte zeig mir die Tabelle der [COMP].,standings
+Tabelle der [COMP],standings
+[COMP] Tabelle,standings
+Wie war die [COMP] Tabelle in der zehnten Runde?,standings
+[COMP] Tabelle 10. Runde,standings
+[COMP] Tabelle letzte Runde,standings
+Wie ist der aktuelle Kader von [TEAM]?,squad
+Wer spielt bei [TEAM]?,squad
+Welche Spieler sind bei [TEAM]?,squad
+Wie ist der Kader von [TEAM]?,squad
+Wer sind die Spieler bei [TEAM]?,squad
+Bitte zeig mir den Kader von [TEAM],squad
+Kader [TEAM],squad
+Kader [TEAM] 2016,squad
+Aktueller Kader [TEAM],squad
+Spieler [TEAM],squad
+Spieler [TEAM] 2016,squad
+Kader [TEAM] letzte Saison,squad
+Wie war der Kader von [TEAM] letzte Saison?,squad
+Bitte zeige mir den Kader von [TEAM] von letzter Saison,squad
+Spieler [TEAM] letzte Saison,squad
+Wie ist der Spielplan von [TEAM]?,schedule
+Wann ist das nächste Spiel von [TEAM]?,schedule
+Was ist der Spielplan der [COMP]?,schedule
+Welche Spiele gibt es in der [COMP] dieses Wochenende?,schedule
+Spiele dieses Wochenende,schedule
+Was sind die aktuellen Spiele?,schedule
+Was sind die kommenden Spiele der [COMP]?,schedule
+Was sind die kommenden Spiele von [TEAM]?,schedule
+Wann ist das Spiel [TEAM] gegen [TEAM]?,schedule
+Wann ist das nächste Spiel [TEAM] gegen [TEAM]?,schedule
+Spielt [TEAM] gegen [TEAM]?,schedule
+Spielplan [TEAM] 2018,schedule
+Spielplan [TEAM] Jänner,schedule
+Spielplan [COMP] 2018,schedule
+Spielplan [COMP] Jänner,schedule
+Spielplan [COMP] kommendes Wochenende,schedule
+Spielplan [COMP] nächste Runde,schedule
+Spiele der [COMP] in der nächsten Runde,schedule
+Wie war das Ergebnis [TEAM] gegen [TEAM] am 12. Oktober?,result
+[TEAM] gegen [TEAM] 12.10.,result
+[TEAM] [TEAM] Head to Head,result
+[TEAM] [TEAM] h2h,result
+12. Oktober [TEAM] - [TEAM],result
+Wie waren die letzten 10 Spiele von [TEAM]?,result
+Wie hat [TEAM] dieses Jahr gespielt?,result
+Wie hat [TEAM] dieses Jahr in der [COMP] gespielt?,result
+Ergebnisse [TEAM] Oktober,result
+Ergebnisse [TEAM] Oktober bis Dezember,result
+Wie hat [TEAM] in der Hinrunde gespielt?,result
+[TEAM] Hinrunde,result
+[TEAM] Rückrunde,result
+[TEAM] Hinrunde 2016,result
+[TEAM] Rückrunde 2016,result
+Ergebnisse [TEAM] Hinrunde,result
+Ergebnisse [TEAM] Rückrunde,result
+Ergebnisse [TEAM] Hinrunde 2016,result
+Ergebnisse [TEAM] Rückrunde 2016,result
+Wie waren die Ergebnisse von [TEAM] in der Rückrunde 2016?,result
+Wie waren die Ergebnisse von [TEAM] in der Hinrunde 2016?,result
+Ergebnisse [TEAM] Oktober in der [COMP],result
+Ergebnisse [TEAM] Oktober bis Dezember in der [COMP],result
+Wie hat [TEAM] in der Hinrunde der [COMP] gespielt?,result
+[TEAM] Hinrunde in der [COMP],result
+[TEAM] Rückrunde in der [COMP],result
+[TEAM] Hinrunde 2016 in der [COMP],result
+[TEAM] Rückrunde 2016 in der [COMP],result
+Ergebnisse [TEAM] Hinrunde in der [COMP],result
+Ergebnisse [TEAM] Rückrunde in der [COMP],result
+Ergebnisse [TEAM] Hinrunde 2016 in der [COMP],result
+Ergebnisse [TEAM] Rückrunde 2016 in der [COMP],result
+Wie waren die Ergebnisse von [TEAM] in der Rückrunde der [COMP] 2016?,result
+Wie waren die Ergebnisse von [TEAM] in der Hinrunde der [COMP] 2016?,result
+Bei welcher Mannschaft spielt [PLAY]?,player_info
+Wo spielt [PLAY]?,player_info
+Details [PLAY],player_info
+Spieler Details [PLAY],player_info
+Wo hat [PLAY] bisher gespielt?,player_info
+[PLAY] Transfers,player_info
+Seit wann spielt [PLAY] bei [TEAM]?,player_info
+Vertrag von [PLAY] bei [TEAM],player_info
+Bis wann hat [PLAY] einen Vertrag bei [TEAM]?,player_info
+Wieviele Tore hat [PLAY] diese Saison geschossen?,player_stats
+Wieviele Assists hat [PLAY] diese Saison?,player_stats
+Wieviele Einsätze hatte [PLAY] diese Saison?,player_stats
+Leistungsdaten [PLAY] 2017,player_stats
+Was sind die Leistungsdaten von [PLAY] 2017?,player_stats
+Was sind die Leistungsdaten von [PLAY] 2017 in der [COMP]?,player_stats
+Leistungsdaten [PLAY] 2017 in der [COMP],player_stats
