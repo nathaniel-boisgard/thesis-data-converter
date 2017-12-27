@@ -51,7 +51,14 @@ public class BaseBuilder {
     private ArrayList<Team> teams = new ArrayList<>();
     private ArrayList<Player> players = new ArrayList<>();
     
+    /**
+     * These properties are used to create permutations using all possible labels, including synonyms
+     */
+    private ArrayList<Competition> competitionLabels = new ArrayList<>();
+    private ArrayList<Team> teamLabels = new ArrayList<>();
+    
     public ArrayList<Utterance> utterances = new ArrayList<>();
+    public ArrayList<Utterance> utterancesIncludingSynonyms = new ArrayList<>();
     
     // LOAD CSVS, CONVERT THEM TO PREFILLED UTTERANCES
     public BaseBuilder(
@@ -79,6 +86,16 @@ public class BaseBuilder {
         
         return this.utterances;
     }
+
+    public ArrayList<Utterance> getUtterancesIncludingSynonyms() {
+        
+        return utterancesIncludingSynonyms;
+    }
+
+    public void setUtterancesIncludingSynonyms(ArrayList<Utterance> utterancesIncludingSynonyms) {
+        
+        this.utterancesIncludingSynonyms = utterancesIncludingSynonyms;
+    }
     
     /**
      * Prepare all fields. Load data from CSVs, create permutations.
@@ -87,20 +104,50 @@ public class BaseBuilder {
      */
     private void init() throws IOException {
 
-        this.patterns = parseCsvFile(patternCsvLocation, Pattern.class);
-        this.competitions = parseCsvFile(competitionCsvLocation, Competition.class);
-        this.teams = parseCsvFile(teamCsvLocation, Team.class);
-        this.players = parseCsvFile(playerCsvLocation, Player.class);
+        patterns = parseCsvFile(patternCsvLocation, Pattern.class);
+        competitions = parseCsvFile(competitionCsvLocation, Competition.class);
+        teams = parseCsvFile(teamCsvLocation, Team.class);
+        players = parseCsvFile(playerCsvLocation, Player.class);
         
+        // CREATE LABEL LISTS OUT OF NORMAL ENTITY LISTS
         for(Team t:teams){
             
-            LOGGER.info(t.toString());
-            LOGGER.info("Synyonyms: {}",t.getSynonyms().length);
+            teamLabels.add(t);
+            
+            if(t.getSynonyms().length > 0){
+                
+                for(String s:t.getSynonyms()){
+                    
+                    if(!s.equals("")){
+                        
+                        Team tSyn = new Team(s, t.getSynonymsString());
+                        teamLabels.add(tSyn);
+                    }                        
+                }
+            }
+        }        
+        for(Competition c:competitions){
+            
+            competitionLabels.add(c);
+            
+            if(c.getSynonyms().length > 0){
+                
+                for(String s:c.getSynonyms()){
+                    
+                    if(!s.equals("")){
+                        
+                        Competition cSyn = new Competition(s, c.getSynonymsString());
+                        competitionLabels.add(cSyn);
+                    }                        
+                }
+            }
         }
         
-        setUtterances(createUtterances());
-        
+        setUtterances(createUtterances(false));
         LOGGER.info("Created {} utterances",getUtterances().size());
+        
+        setUtterancesIncludingSynonyms(createUtterances(true));        
+        LOGGER.info("Created {} utterances including entity synonyms",getUtterancesIncludingSynonyms().size());
     }
     
     /**
@@ -128,9 +175,10 @@ public class BaseBuilder {
     /**
      * Create all Utterances possible with the initialized set of patterns and their replacements
      * 
+     * @param withSynonyms
      * @return All possible combinations
      */
-    public ArrayList<Utterance> createUtterances(){
+    public ArrayList<Utterance> createUtterances(boolean withSynonyms){
         
         ArrayList<Utterance> allUtterances = new ArrayList<>();
         
@@ -152,7 +200,7 @@ public class BaseBuilder {
             do{
                 
                 // CREATE PERMUTATIONS
-                utterances = createPermutationsForPlaceholders(utterances);
+                utterances = createPermutationsForPlaceholders(utterances, withSynonyms);
                 
             }while(hasPlaceholders(utterances));
             
@@ -167,9 +215,10 @@ public class BaseBuilder {
      * Create all possible permutations possible for a list of utterances
      * 
      * @param utterances
+     * @param withSynonyms
      * @return All possible permutations for given list
      */
-    public ArrayList<Utterance> createPermutationsForPlaceholders(ArrayList<Utterance> utterances){
+    public ArrayList<Utterance> createPermutationsForPlaceholders(ArrayList<Utterance> utterances, boolean withSynonyms){
         
         ArrayList<Utterance> permutations = new ArrayList<>();
         
@@ -187,13 +236,13 @@ public class BaseBuilder {
                     // COMPETITION PLACEHOLDER FOUND
                     case "[COMP]":
 
-                        permutations.addAll(enrichPlaceholderWithEntites(u, competitions, m.start(), "COMP"));
+                        permutations.addAll(enrichPlaceholderWithEntites(u, withSynonyms?competitionLabels:competitions, m.start(), "COMP"));
                         break;
 
                     // TEAM PLACEHOLDER FOUND
                     case "[TEAM]":
 
-                        permutations.addAll(enrichPlaceholderWithEntites(u, teams, m.start(), "TEAM"));
+                        permutations.addAll(enrichPlaceholderWithEntites(u, withSynonyms?teamLabels:teams, m.start(), "TEAM"));
                         break;
 
                     // PLAYER PLACEHOLDER FOUND

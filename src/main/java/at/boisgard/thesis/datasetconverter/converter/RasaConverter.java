@@ -111,9 +111,7 @@ public class RasaConverter {
                 // CHECK IF SYNSET IS ALREADY IN LIST, IF NOT -> ADD
                 SynSet nSS = new SynSet(nE.getName(), nE.getSynonyms());
                 
-                if(synSets.indexOf(nSS) == -1){
-                                        
-                    LOGGER.info("Found SynSet candidate for Entity {} with {} synonyms.",nSS.getValue(),nSS.getSynonyms().length);
+                if(synSets.indexOf(nSS) == -1){           
                 
                     synSets.add(nSS);
                 }                
@@ -131,6 +129,6 @@ public class RasaConverter {
         
         ObjectMapper oMapper = new ObjectMapper();
         
-        oMapper.writeValue(new File("rasa-training.json"), rasaDataWrapper);
+        oMapper.writeValue(new File("data/rasa/rasa-training.json"), rasaDataWrapper);
     }
 }

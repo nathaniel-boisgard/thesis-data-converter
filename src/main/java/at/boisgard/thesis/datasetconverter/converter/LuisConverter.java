@@ -60,6 +60,8 @@ public class LuisConverter {
             results.add(new Intent(u.getText(), u.getIntent().getValue(), convertNamedEntities(u.getNamedEntities())));
         }
         
+        // @TODO: ADD INTENTS FOR EVERY SYNONYM? 
+        
         return results;
     }
     
@@ -117,7 +119,7 @@ public class LuisConverter {
             // WRITE REMAINING INTENTS IF PRESENT
             if(chunk.size() > 0){
                 
-                saveToFile(oMapper, chunk, "luis-training-"+(Integer)(j/100)+".json");
+                saveToFile(oMapper, chunk, "data/luis/luis-training-"+(Integer)(j/100)+".json");
                 nOfFiles++;
             }
             
