@@ -26,6 +26,7 @@ public class WatsonConverter {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(WatsonConverter.class);
     public ArrayList<Utterance> utterances;
+    public String language;
     
     public ArrayList<Intent> intents = new ArrayList<>();
     public ArrayList<Entity> entities = new ArrayList<>();
@@ -35,9 +36,10 @@ public class WatsonConverter {
      * 
      * @param utterances 
      */
-    public WatsonConverter(ArrayList<Utterance> utterances){
+    public WatsonConverter(ArrayList<Utterance> utterances, String language){
         
         this.utterances = utterances;
+        this.language = language;
     }
     
     /**
@@ -87,8 +89,8 @@ public class WatsonConverter {
     
     public void save() throws IOException{
         
-        BufferedWriter bWIntents = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/watson/intents.csv"),StandardCharsets.UTF_8));
-        BufferedWriter bWEntities = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/watson/entities.csv"),StandardCharsets.UTF_8));
+        BufferedWriter bWIntents = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/"+language+"/watson/intents.csv"),StandardCharsets.UTF_8));
+        BufferedWriter bWEntities = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/"+language+"/watson/entities.csv"),StandardCharsets.UTF_8));
     
         for(Intent i:intents){
             

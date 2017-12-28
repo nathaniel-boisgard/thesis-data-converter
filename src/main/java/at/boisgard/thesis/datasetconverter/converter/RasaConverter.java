@@ -28,15 +28,17 @@ public class RasaConverter {
     private static final Logger LOGGER = LoggerFactory.getLogger(RasaConverter.class);
     public ArrayList<Utterance> utterances;
     public ArrayList<SynSet> synSets = new ArrayList<>();
+    public String language;
     
     /**
      * Init with base Utterances
      * 
      * @param utterances 
      */
-    public RasaConverter(ArrayList<Utterance> utterances){
+    public RasaConverter(ArrayList<Utterance> utterances, String language){
         
         this.utterances = utterances;
+        this.language = language;
     }
     
     /**
@@ -129,6 +131,6 @@ public class RasaConverter {
         
         ObjectMapper oMapper = new ObjectMapper();
         
-        oMapper.writeValue(new File("data/rasa/rasa-training.json"), rasaDataWrapper);
+        oMapper.writeValue(new File("data/"+language+"/rasa/rasa-training.json"), rasaDataWrapper);
     }
 }

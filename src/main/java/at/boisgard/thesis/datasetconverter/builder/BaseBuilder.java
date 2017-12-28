@@ -46,6 +46,8 @@ public class BaseBuilder {
     private final String teamCsvLocation;
     private final String playerCsvLocation;
     
+    public final String language;
+    
     private ArrayList<Pattern> patterns = new ArrayList<>();
     private ArrayList<Competition> competitions = new ArrayList<>();
     private ArrayList<Team> teams = new ArrayList<>();
@@ -65,7 +67,8 @@ public class BaseBuilder {
             @Value("${data.csv.patterns.filepath:'FAIL'}") String patternCsvLocation,
             @Value("${data.csv.competitions.filepath:'FAIL'}") String competitionCsvLocation,
             @Value("${data.csv.teams.filepath:'FAIL'}") String teamCsvLocation,
-            @Value("${data.csv.players.filepath:'FAIL'}") String playerCsvLocation) throws IOException{
+            @Value("${data.csv.players.filepath:'FAIL'}") String playerCsvLocation,
+            @Value("${data.csv.language:'de'}") String language) throws IOException{
         
         regexPattern = java.util.regex.Pattern.compile(REGEX_PATTERN);
         
@@ -73,7 +76,8 @@ public class BaseBuilder {
         this.competitionCsvLocation = competitionCsvLocation;
         this.teamCsvLocation = teamCsvLocation;
         this.playerCsvLocation = playerCsvLocation;
-
+        this.language = language;
+        
         init();
     }
     

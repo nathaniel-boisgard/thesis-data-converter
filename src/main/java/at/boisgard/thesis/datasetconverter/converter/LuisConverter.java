@@ -24,15 +24,17 @@ public class LuisConverter {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(LuisConverter.class);
     public  ArrayList<Utterance> utterances;
+    public String language;
     
     /**
      * Init with base Utterances
      * 
      * @param utterances 
      */
-    public LuisConverter(ArrayList<Utterance> utterances){
+    public LuisConverter(ArrayList<Utterance> utterances, String language){
         
         this.utterances = utterances;
+        this.language = language;
     }
     
     /**
@@ -107,7 +109,7 @@ public class LuisConverter {
                 if(j % 100 == 0){
                     
                     // WRITE FILE 
-                    saveToFile(oMapper, chunk, "data/luis/luis-training-"+(Integer)(j/100)+".json");
+                    saveToFile(oMapper, chunk, "data/"+language+"/luis/luis-training-"+(Integer)(j/100)+".json");
                     nOfFiles++;
                                         
                     chunk = new ArrayList<>();
@@ -119,7 +121,7 @@ public class LuisConverter {
             // WRITE REMAINING INTENTS IF PRESENT
             if(chunk.size() > 0){
                 
-                saveToFile(oMapper, chunk, "data/luis/luis-training-"+(Integer)(j/100)+".json");
+                saveToFile(oMapper, chunk, "data/"+language+"/luis/luis-training-"+(Integer)(j/100)+".json");
                 nOfFiles++;
             }
             

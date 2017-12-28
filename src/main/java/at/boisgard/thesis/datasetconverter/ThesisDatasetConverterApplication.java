@@ -35,7 +35,7 @@ public class ThesisDatasetConverterApplication {
         
         LOGGER.info("Converting {} Utterances to LUIS format",baseBuilder.utterancesIncludingSynonyms.size());
         
-        LuisConverter lConverter = new LuisConverter(baseBuilder.utterancesIncludingSynonyms);
+        LuisConverter lConverter = new LuisConverter(baseBuilder.utterancesIncludingSynonyms, baseBuilder.language);
         
         int nOfFiles = lConverter.convert();
         
@@ -47,7 +47,7 @@ public class ThesisDatasetConverterApplication {
         
         LOGGER.info("Converting {} Utterances to rasa format",baseBuilder.utterances.size());
         
-        RasaConverter rConverter = new RasaConverter(baseBuilder.utterances);
+        RasaConverter rConverter = new RasaConverter(baseBuilder.utterances, baseBuilder.language);
         
         try {
             
@@ -66,7 +66,7 @@ public class ThesisDatasetConverterApplication {
         
         LOGGER.info("Converting {} Utterances to coreNLP format",baseBuilder.utterancesIncludingSynonyms.size());
         
-        CoreNLPConverter cConverter = new CoreNLPConverter(baseBuilder.utterancesIncludingSynonyms);
+        CoreNLPConverter cConverter = new CoreNLPConverter(baseBuilder.utterancesIncludingSynonyms, baseBuilder.language);
         
         try {
             
@@ -83,7 +83,7 @@ public class ThesisDatasetConverterApplication {
         
         LOGGER.info("Converting {} Utterances to Watson format",baseBuilder.utterances.size());
         
-        WatsonConverter wConverter = new WatsonConverter(baseBuilder.utterances);
+        WatsonConverter wConverter = new WatsonConverter(baseBuilder.utterances, baseBuilder.language);
         
         try {
             

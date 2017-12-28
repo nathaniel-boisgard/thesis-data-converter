@@ -24,15 +24,17 @@ public class CoreNLPConverter {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(CoreNLPConverter.class);
     public  ArrayList<Utterance> utterances;
+    public String language;
     
     /**
      * Init with base Utterances
      * 
      * @param utterances 
      */
-    public CoreNLPConverter(ArrayList<Utterance> utterances){
+    public CoreNLPConverter(ArrayList<Utterance> utterances, String language){
         
         this.utterances = utterances;
+        this.language = language;
     }
     
     /**
@@ -48,7 +50,7 @@ public class CoreNLPConverter {
         LOGGER.info("Done tagging Named Entity mentions");
         
         // CREATE FINAL FORMAT
-        BufferedWriter bW = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/corenlp/corenlp-ner-training.tsv"),StandardCharsets.UTF_8));
+        BufferedWriter bW = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/"+language+"/corenlp/corenlp-ner-training.tsv"),StandardCharsets.UTF_8));
         
         // APPEND CONVERTED UTTERANCE TO FILE
         for(Utterance u:utterances){
