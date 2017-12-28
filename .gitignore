@@ -25,4 +25,4 @@ nbdist/
 nbactions.xml
 
 ### TRAINING DATA ###
-*.json
+data/
