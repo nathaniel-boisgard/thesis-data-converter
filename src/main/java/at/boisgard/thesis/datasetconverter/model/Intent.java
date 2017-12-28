@@ -47,7 +47,7 @@ public enum Intent {
             case "player_info":
                 return Intent.PLAYER_INFO;
                 
-            case "palyer_stats":
+            case "player_stats":
                 return Intent.PLAYER_STATS;
                 
             default:

@@ -4,6 +4,7 @@ import at.boisgard.thesis.datasetconverter.builder.BaseBuilder;
 import at.boisgard.thesis.datasetconverter.converter.CoreNLPConverter;
 import at.boisgard.thesis.datasetconverter.converter.LuisConverter;
 import at.boisgard.thesis.datasetconverter.converter.RasaConverter;
+import at.boisgard.thesis.datasetconverter.converter.WatsonConverter;
 import at.boisgard.thesis.datasetconverter.model.luis.Intent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,6 +76,23 @@ public class ThesisDatasetConverterApplication {
             
             LOGGER.error(e.getMessage());
         }
+    }
+    
+    @PostConstruct
+    public void createWatsonData(){
+        
+        LOGGER.info("Converting {} Utterances to Watson format",baseBuilder.utterances.size());
+        
+        WatsonConverter wConverter = new WatsonConverter(baseBuilder.utterances);
+        
+        try {
+            
+            wConverter.convert();
+            LOGGER.info("Done creating {} Watson training examples",wConverter.utterances.size());
+        } catch (IOException e) {
+            
+            LOGGER.error(e.getMessage());
+        }        
     }
 
     public static void main(String[] args) {
