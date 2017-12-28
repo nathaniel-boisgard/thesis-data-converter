@@ -107,7 +107,7 @@ public class LuisConverter {
                 if(j % 100 == 0){
                     
                     // WRITE FILE 
-                    saveToFile(oMapper, chunk, "luis-training-"+(Integer)(j/100)+".json");
+                    saveToFile(oMapper, chunk, "data/luis/luis-training-"+(Integer)(j/100)+".json");
                     nOfFiles++;
                                         
                     chunk = new ArrayList<>();

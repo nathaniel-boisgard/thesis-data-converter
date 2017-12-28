@@ -1,11 +1,13 @@
 package at.boisgard.thesis.datasetconverter;
 
 import at.boisgard.thesis.datasetconverter.builder.BaseBuilder;
+import at.boisgard.thesis.datasetconverter.converter.CoreNLPConverter;
 import at.boisgard.thesis.datasetconverter.converter.LuisConverter;
 import at.boisgard.thesis.datasetconverter.converter.RasaConverter;
 import at.boisgard.thesis.datasetconverter.model.luis.Intent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +58,23 @@ public class ThesisDatasetConverterApplication {
         }
             
         
+    }
+    
+    @PostConstruct
+    public void createCoreNLPData(){
+        
+        LOGGER.info("Converting {} Utterances to coreNLP format",baseBuilder.utterancesIncludingSynonyms.size());
+        
+        CoreNLPConverter cConverter = new CoreNLPConverter(baseBuilder.utterancesIncludingSynonyms);
+        
+        try {
+            
+            cConverter.convert();
+            LOGGER.info("Done creating {} coreNLP NER training examples",cConverter.utterances.size());
+        } catch (IOException e) {
+            
+            LOGGER.error(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
