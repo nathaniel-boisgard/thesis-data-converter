@@ -33,9 +33,9 @@ public class ThesisDatasetConverterApplication {
     @PostConstruct
     public void createLUISData(){
         
-        LOGGER.info("Converting {} Utterances to LUIS format",baseBuilder.utterancesIncludingSynonyms.size());
+        LOGGER.info("Converting {} Utterances to LUIS format",baseBuilder.utterances.size());
         
-        LuisConverter lConverter = new LuisConverter(baseBuilder.utterancesIncludingSynonyms, baseBuilder.language);
+        LuisConverter lConverter = new LuisConverter(baseBuilder.utterances, baseBuilder.language);
         
         int nOfFiles = lConverter.convert();
         

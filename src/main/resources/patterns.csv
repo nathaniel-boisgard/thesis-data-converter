@@ -52,8 +52,6 @@ Spielplan [COMP] nächste Runde,schedule
 Spiele der [COMP] in der nächsten Runde,schedule
 Wie war das Ergebnis [TEAM] gegen [TEAM] am 12. Oktober?,result
 [TEAM] gegen [TEAM] 12.10.,result
-[TEAM] [TEAM] Head to Head,result
-[TEAM] [TEAM] h2h,result
 12. Oktober [TEAM] - [TEAM],result
 Wie waren die letzten 10 Spiele von [TEAM]?,result
 Wie hat [TEAM] dieses Jahr gespielt?,result
@@ -97,6 +95,7 @@ Wieviele Tore hat [PLAY] diese Saison geschossen?,player_stats
 Wieviele Assists hat [PLAY] diese Saison?,player_stats
 Wieviele Einsätze hatte [PLAY] diese Saison?,player_stats
 Leistungsdaten [PLAY] 2017,player_stats
+Einsatzminuten [PLAY],player_stats
 Was sind die Leistungsdaten von [PLAY] 2017?,player_stats
 Was sind die Leistungsdaten von [PLAY] 2017 in der [COMP]?,player_stats
 Leistungsdaten [PLAY] 2017 in der [COMP],player_stats

@@ -89,13 +89,29 @@ public class WatsonConverter {
     
     public void save() throws IOException{
         
-        BufferedWriter bWIntents = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/"+language+"/watson/intents.csv"),StandardCharsets.UTF_8));
+        
+        
         BufferedWriter bWEntities = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/"+language+"/watson/entities.csv"),StandardCharsets.UTF_8));
     
+        // SAVE INTENTS INTO PACKS OF 10000 MAX
+        ArrayList<Intent> chunk = new ArrayList<>();
+        
+        int j = 1;
         for(Intent i:intents){
             
-            bWIntents.append(i.getText()).append(",").append(i.getIntent()).append("\n");
+            chunk.add(i);
+            
+            if(chunk.size()==10000){
+                
+                saveIntentChunk(chunk, j);
+                
+                j++;
+                chunk = new ArrayList<>();
+            }
         }
+        
+        // SAVE WHATEVER IS LEFT IN THE LAST CHUNK
+        saveIntentChunk(chunk, j);
         
         for(Entity e:entities){
             
@@ -112,7 +128,18 @@ public class WatsonConverter {
             bWEntities.append("\n");
         }
         
-        bWIntents.close();
         bWEntities.close();
+    }
+    
+    public void saveIntentChunk(ArrayList<Intent> chunk, int index) throws IOException{
+        
+        BufferedWriter bWIntents = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("data/"+language+"/watson/intents"+Integer.toString(index)+".csv"),StandardCharsets.UTF_8));
+        
+        for(Intent i:chunk){
+            
+            bWIntents.append(i.getText()).append(",").append(i.getIntent()).append("\n");
+        }
+        
+        bWIntents.close();
     }
 }

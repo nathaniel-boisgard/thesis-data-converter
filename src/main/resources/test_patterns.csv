@@ -1,0 +1,18 @@
+Wo ist [TEAM] in der Tabelle?,standings
+Wie ist die Tabelle der [COMP]?,standings
+Tabelle der [COMP],standings
+Kader von [TEAM],squad
+[TEAM] Kader,squad
+Wer spielt bei [TEAM]?,squad
+Nächstes Spiel [TEAM],schedule
+Spielt [TEAM] am Wochenende?,schedule
+Spielplan [COMP],schedule
+Ergebnis [TEAM] gestern,result
+Wie sind Ergebnisse der [COMP] vom Wochenende?, result
+Wann hat [TEAM] gegen [TEAM] das letzte mal gespielt?,result
+Wo spielt [PLAY]?,player_info
+Wie ist die Schuhgröße von [PLAY],player_info
+Bei welchen Teams hat [PLAY] bisher gespielt?,player_info
+Wieviele Tore hat [PLAY] bisher geschossen?,player_stats
+Hat [PLAY] am Wochenende gespielt?,player_stats
+Wie sind die Leistungsdaten von [PLAY],player_stats
