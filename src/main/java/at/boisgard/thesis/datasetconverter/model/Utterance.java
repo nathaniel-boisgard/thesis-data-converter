@@ -13,24 +13,24 @@ import lombok.Data;
  *
  * @author BUERO
  */
-
 @AllArgsConstructor
-public @Data class Utterance {
-    
+public @Data
+class Utterance {
+
     public String text;
     public Intent intent;
     public ArrayList<NamedEntity> namedEntities;
-    
-    public Utterance clone(){
-        
+
+    public Utterance clone() {
+
         ArrayList<NamedEntity> clonedNamedEntities = new ArrayList<>();
-        for(NamedEntity nE: this.getNamedEntities()){
+        for (NamedEntity nE : this.getNamedEntities()) {
             clonedNamedEntities.add(nE);
         }
-        
+
         Utterance clonedUtterance = new Utterance(this.getText(), this.getIntent(), clonedNamedEntities);
-        
+
         return clonedUtterance;
     }
-    
+
 }

@@ -7,8 +7,9 @@ package at.boisgard.thesis.datasetconverter.converter;
 
 import at.boisgard.thesis.datasetconverter.model.NamedEntity;
 import at.boisgard.thesis.datasetconverter.model.Utterance;
-import at.boisgard.thesis.datasetconverter.model.luis.Entity;
-import at.boisgard.thesis.datasetconverter.model.luis.Intent;
+import at.boisgard.thesis.datasetconverter.model.witai.BaseEntity;
+import at.boisgard.thesis.datasetconverter.model.witai.Entity;
+import at.boisgard.thesis.datasetconverter.model.witai.Sample;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +21,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author BUERO
  */
-public class LuisConverter {
+public class WitaiConverter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LuisConverter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WitaiConverter.class);
     public ArrayList<Utterance> utterances;
     public String language;
 
@@ -31,7 +32,7 @@ public class LuisConverter {
      *
      * @param utterances
      */
-    public LuisConverter(ArrayList<Utterance> utterances, String language) {
+    public WitaiConverter(ArrayList<Utterance> utterances, String language) {
 
         this.utterances = utterances;
         this.language = language;
@@ -48,18 +49,18 @@ public class LuisConverter {
     }
 
     /**
-     * Convert the base Utterance POJOs to LUIS Intents
+     * Convert the base Utterance POJOs to Wit.ai Samples
      *
-     * @return List of LUIS Intents
+     * @return List of Wit Samples
      */
-    public ArrayList<Intent> convertUtterances() {
+    public ArrayList<Sample> convertUtterances() {
 
-        ArrayList<Intent> results = new ArrayList<>();
+        ArrayList<Sample> results = new ArrayList<>();
 
         // CREATE INTENT FOR FOR EACH UTTERANCE AND ADD TO LIST
         for (Utterance u : utterances) {
 
-            results.add(new Intent(u.getText(), u.getIntent().getValue(), convertNamedEntities(u.getNamedEntities())));
+            results.add(new Sample(u.getText(), createEntities(u)));
         }
 
         // @TODO: ADD INTENTS FOR EVERY SYNONYM? 
@@ -67,18 +68,23 @@ public class LuisConverter {
     }
 
     /**
-     * Convert base NamedEntity POJOs to LUIS Entities
+     * Convert base Utterance to Wit.ai entities
      *
-     * @param namesEntites
-     * @return List of LUIS Entities
+     *
+     * @param u
+     * @return List of Wit Entities
      */
-    public ArrayList<Entity> convertNamedEntities(ArrayList<NamedEntity> namesEntites) {
+    public ArrayList<BaseEntity> createEntities(Utterance u) {
 
-        ArrayList<Entity> results = new ArrayList<>();
+        ArrayList<BaseEntity> results = new ArrayList<>();
+
+        // CREATE BASE INTENT ENTITY
+        BaseEntity intentEntity = new BaseEntity(u.getIntent().getValue(), "intent");
+        results.add(intentEntity);
 
         // CREATE ENTITIES FOR EACH NAMED ENTITIES AND ADD TO LIST
-        for (NamedEntity nE : namesEntites) {
-
+        for (NamedEntity nE : u.getNamedEntities()) {
+            
             results.add(new Entity(nE.getStartAt(), nE.getEndAt(), nE.getName(), nE.getEntityType().getValue()));
         }
 
@@ -86,30 +92,29 @@ public class LuisConverter {
     }
 
     /**
-     * Save intents in chunks of 100 (LUIS API only accepts up to 100 intents
-     * per call)
+     * Save samples in chunks of 100
      *
-     * @param intents
+     * @param samples
      * @return Number of files written
      */
-    public int saveSplitFiles(ArrayList<Intent> intents) {
+    public int saveSplitFiles(ArrayList<Sample> samples) {
 
         ObjectMapper oMapper = new ObjectMapper();
 
         try {
 
-            ArrayList<Intent> chunk = new ArrayList<>();
+            ArrayList<Sample> chunk = new ArrayList<>();
 
             int j = 1;
             int nOfFiles = 0;
-            for (Intent i : intents) {
+            for (Sample s : samples) {
 
-                chunk.add(i);
+                chunk.add(s);
 
                 if (j % 100 == 0) {
 
                     // WRITE FILE 
-                    saveToFile(oMapper, chunk, "data/" + language + "/luis/luis-training-" + (Integer) (j / 100) + ".json");
+                    saveToFile(oMapper, chunk, "data/" + language + "/wit.ai/witai-training-" + (Integer) (j / 100) + ".json");
                     nOfFiles++;
 
                     chunk = new ArrayList<>();
@@ -121,7 +126,7 @@ public class LuisConverter {
             // WRITE REMAINING INTENTS IF PRESENT
             if (chunk.size() > 0) {
 
-                saveToFile(oMapper, chunk, "data/" + language + "/luis/luis-training-" + (Integer) (j / 100) + ".json");
+                saveToFile(oMapper, chunk, "data/" + language + "/wit.ai/witai-training-" + (Integer) (j / 100) + ".json");
                 nOfFiles++;
             }
 
@@ -143,7 +148,7 @@ public class LuisConverter {
      * @param fileName
      * @throws IOException
      */
-    private void saveToFile(ObjectMapper oM, ArrayList<Intent> intents, String fileName) throws IOException {
+    private void saveToFile(ObjectMapper oM, ArrayList<Sample> intents, String fileName) throws IOException {
 
         oM.writeValue(new File(fileName), intents);
     }

@@ -18,10 +18,10 @@ public abstract class Base {
 
         return this.name;
     }
-    
+
     public String[] getSynonyms() {
-        
-        if(synonymsString == null){
+
+        if (synonymsString == null) {
             synonymsString = "";
         }
         return synonymsString.split(";");

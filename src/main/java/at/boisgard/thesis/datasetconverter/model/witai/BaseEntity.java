@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package at.boisgard.thesis.datasetconverter.model.watson;
+package at.boisgard.thesis.datasetconverter.model.witai;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,8 +15,11 @@ import lombok.Data;
  */
 @AllArgsConstructor
 public @Data
-class Intent {
+class BaseEntity {
 
-    public String text;
-    public String intent;
+    @JsonProperty
+    public String value;
+
+    @JsonProperty
+    public String entity;
 }

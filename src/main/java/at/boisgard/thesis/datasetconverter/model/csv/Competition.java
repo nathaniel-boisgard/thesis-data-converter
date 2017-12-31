@@ -22,12 +22,12 @@ class Competition extends Base {
     @JsonProperty
     public String name;
     @JsonProperty
-    public String synonymsString;    
-    
+    public String synonymsString;
+
     @Override
     public String[] getSynonyms() {
-        
-        if(synonymsString == null){
+
+        if (synonymsString == null) {
             synonymsString = "";
         }
         return synonymsString.split(";");

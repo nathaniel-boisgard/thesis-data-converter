@@ -13,8 +13,9 @@ import lombok.Data;
  * @author BUERO
  */
 @AllArgsConstructor
-public @Data class Entity {
-    
+public @Data
+class Entity {
+
     public String value;
     public String entityType;
     public String[] synonyms;

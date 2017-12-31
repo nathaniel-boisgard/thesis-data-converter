@@ -13,12 +13,13 @@ import lombok.Data;
  * @author BUERO
  */
 @AllArgsConstructor
-public @Data class NamedEntity {
-    
+public @Data
+class NamedEntity {
+
     public String name;
     public EntityType entityType;
     public int startAt;
     public int endAt;
     public String[] synonyms;
-    
+
 }

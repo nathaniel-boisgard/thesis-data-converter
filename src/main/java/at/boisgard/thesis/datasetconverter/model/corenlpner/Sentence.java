@@ -12,8 +12,9 @@ import lombok.Data;
  *
  * @author BUERO
  */
-public @Data class Sentence {
-    
+public @Data
+class Sentence {
+
     public String text;
     public ArrayList<String> items;
 }
